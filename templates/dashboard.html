@@ -312,8 +312,6 @@ button{
     font-family:"Segoe UI Symbol","Noto Sans Symbols 2","DejaVu Sans","Apple Symbols",sans-serif;
 }
 
-/* SVG ICONS */
-
 .nav-icon svg{
     width:21px;
     height:21px;
@@ -327,32 +325,68 @@ button{
     height:22px;
 }
 
-.nav-item:hover .nav-icon,
-.nav-item.active .nav-icon{
-    color:#00e4ff;
-    border-color:rgba(0,220,255,.45);
-    background:linear-gradient(145deg,rgba(0,157,255,.26),rgba(0,157,255,.05));
+/* ============================================
+   NEW PREMIUM SETTINGS ICON
+   ============================================ */
+
+.settings-nav .nav-icon{
+    position:relative;
+    overflow:visible;
+}
+
+.settings-nav .nav-icon svg{
+    width:21px;
+    height:21px;
+    transform:rotate(0deg);
+    transition:
+        transform .55s cubic-bezier(.4,0,.2,1),
+        filter .3s ease;
+}
+
+.settings-nav:hover .nav-icon svg,
+.settings-nav.active .nav-icon svg{
+    transform:rotate(55deg);
+}
+
+.settings-nav .nav-icon:before{
+    content:"";
+    position:absolute;
+    inset:-4px;
+    border-radius:13px;
+    border:1px solid transparent;
+    opacity:0;
+    transform:scale(.72);
+    transition:.35s ease;
+}
+
+.settings-nav:hover .nav-icon:before,
+.settings-nav.active .nav-icon:before{
+    opacity:1;
+    transform:scale(1);
+    border-color:rgba(0,217,255,.16);
     box-shadow:
-        0 0 15px rgba(0,185,255,.30),
-        inset 0 0 11px rgba(0,210,255,.09);
-    text-shadow:0 0 10px rgba(0,220,255,.85);
-    transform:scale(1.06);
+        0 0 13px rgba(0,217,255,.10),
+        inset 0 0 10px rgba(0,157,255,.06);
 }
 
-.nav-item:hover .nav-icon svg,
-.nav-item.active .nav-icon svg{
-    filter:drop-shadow(0 0 4px rgba(0,220,255,.55));
+.settings-nav:hover .nav-icon,
+.settings-nav.active .nav-icon{
+    color:#00e4ff;
+    border-color:rgba(0,220,255,.52);
+    background:
+        radial-gradient(circle at 50% 50%,rgba(0,217,255,.20),transparent 55%),
+        linear-gradient(145deg,rgba(0,157,255,.27),rgba(0,157,255,.045));
+    box-shadow:
+        0 0 10px rgba(0,185,255,.28),
+        0 0 24px rgba(0,157,255,.13),
+        inset 0 0 12px rgba(0,210,255,.09);
 }
 
-/* FLIP DIRECTIONAL ICONS IN RTL */
-
-.rtl .nav-icon.flip{
-    transform:scaleX(-1);
-}
-
-.rtl .nav-item:hover .nav-icon.flip,
-.rtl .nav-item.active .nav-icon.flip{
-    transform:scaleX(-1) scale(1.06);
+.settings-nav:hover .nav-icon svg,
+.settings-nav.active .nav-icon svg{
+    filter:
+        drop-shadow(0 0 3px rgba(0,220,255,.9))
+        drop-shadow(0 0 8px rgba(0,157,255,.45));
 }
 
 /* TEXT */
@@ -385,6 +419,21 @@ button{
 .nav-item:hover .nav-text small,
 .nav-item.active .nav-text small{
     color:#6f93b1;
+}
+
+/* SETTINGS TEXT */
+
+.settings-nav .nav-text b{
+    letter-spacing:.15px;
+}
+
+.settings-nav .nav-text small{
+    color:#4b6b86;
+}
+
+.settings-nav:hover .nav-text b,
+.settings-nav.active .nav-text b{
+    text-shadow:0 0 10px rgba(0,200,255,.22);
 }
 
 /* BADGE + ARROW */
@@ -1250,25 +1299,35 @@ button{
         </a>
 
 
-        <!-- SETTINGS -->
+        <!-- =========================================
+             PANEL SETTINGS — REDESIGNED
+             ========================================= -->
 
-        <a href="/settings" class="nav-item" onclick="closeSidebar()">
+        <a
+            href="/settings"
+            class="nav-item settings-nav"
+            onclick="closeSidebar()"
+        >
 
             <span class="nav-icon">
 
-                <svg xmlns="http://www.w3.org/2000/svg"
-                     width="21"
-                     height="21"
-                     viewBox="0 0 24 24"
-                     fill="none"
-                     stroke="currentColor"
-                     stroke-width="1.8"
-                     stroke-linecap="round"
-                     stroke-linejoin="round">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.65"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
 
-                    <circle cx="12" cy="12" r="3"/>
+                    <!-- Main gear -->
 
-                    <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-1.42 1.42-.06-.06a1.7 1.7 0 0 0-1.88-.34 1.7 1.7 0 0 0-1.03 1.56V20h-2v-.48a1.7 1.7 0 0 0-1.03-1.56 1.7 1.7 0 0 0-1.88.34l-.06.06-1.42-1.42.06-.06A1.7 1.7 0 0 0 9.4 15a1.7 1.7 0 0 0-1.56-1.03H7.36v-2h.48A1.7 1.7 0 0 0 9.4 11a1.7 1.7 0 0 0-.34-1.88L9 9.06l1.42-1.42.06.06A1.7 1.7 0 0 0 12.36 8a1.7 1.7 0 0 0 1.03-1.56V6h2v.44A1.7 1.7 0 0 0 16.42 8a1.7 1.7 0 0 0 1.88-.34l.06-.06L19.78 9l-.06.06a1.7 1.7 0 0 0-.34 1.88 1.7 1.7 0 0 0 1.56 1.03h.48v2h-.48A1.7 1.7 0 0 0 19.4 15Z"/>
+                    <path d="M12 3.2l1.05 1.92a7.7 7.7 0 0 1 1.72.71l2.08-.68 1.52 1.52-.68 2.08c.3.54.54 1.12.71 1.72L20.32 11.5v2.14l-1.92 1.05a7.7 7.7 0 0 1-.71 1.72l.68 2.08-1.52 1.52-2.08-.68a7.7 7.7 0 0 1-1.72.71L12 21.96l-2.14-1.05a7.7 7.7 0 0 1-1.72-.71l-2.08.68-1.52-1.52.68-2.08a7.7 7.7 0 0 1-.71-1.72L2.6 13.64V11.5l1.91-1.03c.17-.61.41-1.18.71-1.72l-.68-2.08 1.52-1.52 2.08.68a7.7 7.7 0 0 1 1.72-.71L12 3.2Z"/>
+
+                    <!-- Center -->
+
+                    <circle cx="12" cy="12.57" r="3.05"/>
 
                 </svg>
 
@@ -1348,7 +1407,7 @@ button{
         </a>
 
 
-        <!-- SUPPORT - TELEGRAM -->
+        <!-- SUPPORT -->
 
         <a
             href="https://t.me/pablo_artor"
@@ -1365,16 +1424,12 @@ button{
                      viewBox="0 0 24 24"
                      fill="none">
 
-                    <!-- Telegram Circle -->
-
                     <circle
                         cx="12"
                         cy="12"
                         r="10"
                         fill="currentColor"
                     />
-
-                    <!-- Telegram Paper Plane -->
 
                     <path
                         d="M17.7 6.8 6.35 11.18c-.78.31-.77.74-.14.93l2.91.91 1.11 3.46c.13.4.07.56.48.56.32 0 .46-.15.63-.32l1.4-1.36 2.91 2.15c.54.3.93.14 1.07-.5l1.86-8.77c.2-.78-.3-1.13-.88-.94Z"
@@ -1546,10 +1601,7 @@ button{
 
             <div class="stat-top">
 
-                <span
-                    class="stat-label"
-                    data-i18n="totalUsers"
-                >
+                <span class="stat-label" data-i18n="totalUsers">
                     TOTAL USERS
                 </span>
 
@@ -1563,10 +1615,7 @@ button{
                 {{ total_users }}
             </div>
 
-            <div
-                class="stat-change"
-                data-i18n="allAccounts"
-            >
+            <div class="stat-change" data-i18n="allAccounts">
                 ALL ACCOUNTS
             </div>
 
@@ -1577,10 +1626,7 @@ button{
 
             <div class="stat-top">
 
-                <span
-                    class="stat-label"
-                    data-i18n="activeUsers"
-                >
+                <span class="stat-label" data-i18n="activeUsers">
                     ACTIVE USERS
                 </span>
 
@@ -1594,10 +1640,7 @@ button{
                 {{ active_users }}
             </div>
 
-            <div
-                class="stat-change"
-                data-i18n="currentlyActive"
-            >
+            <div class="stat-change" data-i18n="currentlyActive">
                 CURRENTLY ACTIVE
             </div>
 
@@ -1608,10 +1651,7 @@ button{
 
             <div class="stat-top">
 
-                <span
-                    class="stat-label"
-                    data-i18n="totalTraffic"
-                >
+                <span class="stat-label" data-i18n="totalTraffic">
                     TOTAL TRAFFIC
                 </span>
 
@@ -1631,10 +1671,7 @@ button{
 
             </div>
 
-            <div
-                class="stat-change"
-                data-i18n="availableQuota"
-            >
+            <div class="stat-change" data-i18n="availableQuota">
                 AVAILABLE QUOTA
             </div>
 
@@ -1645,10 +1682,7 @@ button{
 
             <div class="stat-top">
 
-                <span
-                    class="stat-label"
-                    data-i18n="usedTraffic"
-                >
+                <span class="stat-label" data-i18n="usedTraffic">
                     USED TRAFFIC
                 </span>
 
@@ -1668,10 +1702,7 @@ button{
 
             </div>
 
-            <div
-                class="stat-change"
-                data-i18n="totalConsumption"
-            >
+            <div class="stat-change" data-i18n="totalConsumption">
                 TOTAL CONSUMPTION
             </div>
 
